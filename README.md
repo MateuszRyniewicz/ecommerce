@@ -1,2 +1,3 @@
-EC-1: started project.
-EC-2: deleted not necessary files.
+EC-1: started project
+-added packages.
+
