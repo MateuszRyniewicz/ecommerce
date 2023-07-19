@@ -1,9 +1,69 @@
-import React from 'react'
+import React, { FC } from 'react';
+import {
+	AiOutlineSearch,
+	AiOutlineUserDelete,
+	AiOutlineHeart,
+} from 'react-icons/ai';
+import { FaBars } from 'react-icons/fa';
+import { BsFillBagFill } from 'react-icons/bs';
+import {
+	StyledBoxIconCart,
+	StyledBoxImage,
+	StyledBoxUserMenu,
+	StyledBoxCounter,
+	StyledListMenu,
+	StyledCounter,
+	StyledLogo,
+	StyledLogoCircle,
+	StyledHeader,
+	StyledNav,
+	StyledBoxLogoAndMenu,
+	StyledMenuItem,
+} from './Header.css';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
-  return (
-    <Header></Header>
-  )
-}
+const menuItems = [
+	{ name: 'Home', path: '/' },
+	{ name: 'Shop', path: '/shop' },
+	{ name: 'Collection', path: '/collection' },
+	{ name: 'Journal', path: '/journal' },
+	{ name: 'Lookbook', path: '/lookbook' },
+	{ name: 'Pages', path: '/pages' },
+];
 
-export default Header
+const Header: FC = () => {
+	return (
+		<StyledHeader>
+			<StyledNav>
+				<StyledBoxLogoAndMenu>
+					<StyledBoxImage>
+						<StyledLogo>UOM</StyledLogo>
+						<StyledLogoCircle />
+					</StyledBoxImage>
+					<StyledListMenu>
+						{menuItems.map((item) => (
+							<li>
+								<StyledMenuItem to={item.path}>{item.name}</StyledMenuItem>
+							</li>
+						))}
+					</StyledListMenu>
+				</StyledBoxLogoAndMenu>
+
+				<StyledBoxUserMenu>
+					<AiOutlineSearch />
+					<AiOutlineUserDelete />
+					<AiOutlineHeart />
+					<StyledBoxIconCart>
+						<BsFillBagFill />
+						<StyledBoxCounter>
+							<StyledCounter>30</StyledCounter>
+						</StyledBoxCounter>
+					</StyledBoxIconCart>
+					<FaBars />
+				</StyledBoxUserMenu>
+			</StyledNav>
+		</StyledHeader>
+	);
+};
+
+export default Header;

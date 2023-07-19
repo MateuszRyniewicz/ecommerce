@@ -16,3 +16,5 @@ root.render(
 		</ThemeProvider>
 	</React.StrictMode>
 );
+
+//style footer header
