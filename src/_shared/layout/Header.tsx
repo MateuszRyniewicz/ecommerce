@@ -41,8 +41,8 @@ const Header: FC = () => {
 						<StyledLogoCircle />
 					</StyledBoxImage>
 					<StyledListMenu>
-						{menuItems.map((item) => (
-							<li>
+						{menuItems.map((item, index) => (
+							<li key={index}>
 								<StyledMenuItem to={item.path}>{item.name}</StyledMenuItem>
 							</li>
 						))}
@@ -51,7 +51,9 @@ const Header: FC = () => {
 
 				<StyledBoxUserMenu>
 					<AiOutlineSearch />
-					<AiOutlineUserDelete />
+					<Link to={'/login'}>
+						<AiOutlineUserDelete />
+					</Link>
 					<AiOutlineHeart />
 					<StyledBoxIconCart>
 						<BsFillBagFill />
