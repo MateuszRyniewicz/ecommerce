@@ -27,7 +27,7 @@ const validationSchema = () =>
 	});
 
 const FormLogin: FC = () => {
-	const [isOpen, setIsOpen] = useState<boolean>(true);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 

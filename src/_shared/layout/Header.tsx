@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { RootState } from '../../store';
+import { useSelector } from 'react-redux';
 import {
 	AiOutlineSearch,
 	AiOutlineUserDelete,
@@ -32,6 +34,8 @@ const menuItems = [
 ];
 
 const Header: FC = () => {
+	const user = useSelector((state: RootState) => state.user.user);
+	console.log('header', user);
 	return (
 		<StyledHeader>
 			<StyledNav>
@@ -58,7 +62,13 @@ const Header: FC = () => {
 					<StyledBoxIconCart>
 						<BsFillBagFill />
 						<StyledBoxCounter>
-							<StyledCounter>30</StyledCounter>
+							<StyledCounter>
+								{user === null ? (
+									0
+								) : Array.isArray(user.cart) ? (
+									<p> {user.cart.length}</p>
+								) : null}
+							</StyledCounter>
 						</StyledBoxCounter>
 					</StyledBoxIconCart>
 					<FaBars />
