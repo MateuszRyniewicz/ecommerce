@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -14,8 +14,8 @@ import {
 	StyledForm,
 	StyledInput,
 	StyledFormBoxError,
-	StyledBtnCard1,
 } from './home/FormLogin.css';
+import Popup from './Popup';
 
 const validationSchema = () =>
 	Yup.object().shape({
@@ -27,6 +27,7 @@ const validationSchema = () =>
 	});
 
 const FormLogin: FC = () => {
+	const [isOpen, setIsOpen] = useState<boolean>(true);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -41,11 +42,15 @@ const FormLogin: FC = () => {
 	};
 
 	useEffect(() => {
-		if (response?.success) navigate('/dashboard');
+		if (response?.success) {
+			setIsOpen(true);
+		}
+		// if (response?.success) navigate('/dashboard');
 	}, [response?.success]);
 
 	return (
 		<StyledSection>
+			{isOpen && <Popup />}
 			<StyledHeaderText>LOGIN ACCOUNT</StyledHeaderText>
 			<Formik<Partial<User>>
 				initialValues={initialValues}
@@ -80,7 +85,7 @@ const FormLogin: FC = () => {
 						<StyledFormBoxError>
 							{errors.password && touched.password && errors.password}
 						</StyledFormBoxError>
-						<button>Submit</button>
+						<button type='submit'>Submit</button>
 					</StyledForm>
 				)}
 			</Formik>
