@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductSection = () => {
 	return <section>
-        <div></div>
+        <div>test</div>
     </section>;
 };
 

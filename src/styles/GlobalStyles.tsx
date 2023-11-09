@@ -29,6 +29,24 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     object-fit: cover;
   }  
+
+
+
+  main{
+    margin-top:100px;
+    border:5px solid #ccc;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; 
+  }
+
+  .container{
+    display:flex;
+    flex-direction:column;
+    min-height: 100vh;
+  }
+  
 `;
 
 export default GlobalStyle;

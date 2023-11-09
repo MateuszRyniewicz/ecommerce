@@ -1,3 +1,7 @@
+export interface ProductsState {
+	products: Product[];
+}
+
 export interface Product {
 	id: number;
 	title: string;
@@ -5,5 +9,6 @@ export interface Product {
 	description: string;
 	category: string;
 	image: string;
+	amount: number;
 	rating: { rate: number; count: number };
 }

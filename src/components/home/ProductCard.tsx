@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Product } from '../../types/product';
+import { AiOutlineHeart } from 'react-icons/ai';
 import {
 	StyledProdcutCard,
 	StyledBoxCategoryLike,
@@ -10,22 +11,36 @@ import {
 	StyledBoxTextColor,
 	StyledBoxText,
 } from './ProductCard.css';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addProductToCart } from '../../store/AuthSlice';
 
 interface ProdcutCard {
 	product: Product;
 }
 
 const ProductCard: FC<ProdcutCard> = ({ product }) => {
+	const dispatch = useDispatch();
+	const naviagte = useNavigate();
 	return (
 		<StyledProdcutCard>
 			<StyledBoxImg>
 				<StyledImgCard src={product.image} alt={product.title} />
-				<StyledBtnCard>Add to Cart</StyledBtnCard>
+				<StyledBtnCard
+					onClick={() => {
+						dispatch(addProductToCart(product));
+						
+						naviagte('/dashboard');
+					}}>
+					Add to Cart
+				</StyledBtnCard>
 			</StyledBoxImg>
 			<div>
 				<StyledBoxCategoryLike>
 					<StyledBoxTextColor>{product.category}</StyledBoxTextColor>
-					<p>serce</p>
+					<p>
+						<AiOutlineHeart />
+					</p>
 				</StyledBoxCategoryLike>
 				<StyledBoxText>{product.title}</StyledBoxText>
 				<StyledBoxText>{product.price}</StyledBoxText>

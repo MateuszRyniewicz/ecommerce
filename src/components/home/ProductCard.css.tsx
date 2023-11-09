@@ -22,7 +22,7 @@ export const StyledImgCard = styled.img`
 	object-fit: contain;
 `;
 
-export const StyledBtnCard = styled.button`
+export const StyledBtnCard = styled.div`
 	width: 90%;
 	height: 30px;
 	background-color: #fff;
@@ -37,7 +37,9 @@ export const StyledBtnCard = styled.button`
 `;
 
 export const StyledProdcutCard = styled.div`
-	border: 1px solid red;
+	border: 1px solid #ddd;
+	width: 200px;
+	padding: 5px;
 
 	&:hover ${StyledBtnCard} {
 		bottom: 0;
@@ -50,7 +52,9 @@ export const StyledBoxTextColor = styled.p`
 `;
 
 export const StyledBoxText = styled.p`
-	color: #000;
 	font-size: 10px;
-	padding: 0 3px;
+	font-weight: 500;
+	line-height: 15px;
+	color: #000;
+	margin-bottom: 5px;
 `;
