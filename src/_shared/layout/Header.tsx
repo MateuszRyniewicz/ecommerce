@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
 import {
@@ -22,7 +22,7 @@ import {
 	StyledBoxLogoAndMenu,
 	StyledMenuItem,
 } from './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const menuItems = [
 	{ name: 'Home', path: '/' },
@@ -35,7 +35,9 @@ const menuItems = [
 
 const Header: FC = () => {
 	const user = useSelector((state: RootState) => state.user.user);
-	console.log('header', user);
+	// console.log('header', user);
+
+	const navigate = useNavigate();
 	return (
 		<StyledHeader>
 			<StyledNav>
@@ -59,7 +61,8 @@ const Header: FC = () => {
 						<AiOutlineUserDelete />
 					</Link>
 					<AiOutlineHeart />
-					<StyledBoxIconCart onClick={() => console.log('go to basket')}>
+
+					<StyledBoxIconCart onClick={() => navigate('/basket')}>
 						<BsFillBagFill />
 						<StyledBoxCounter>
 							<StyledCounter>

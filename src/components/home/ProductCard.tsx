@@ -20,6 +20,7 @@ interface ProdcutCard {
 }
 
 const ProductCard: FC<ProdcutCard> = ({ product }) => {
+	//console.log('wartosci produktu', product);
 	const dispatch = useDispatch();
 	const naviagte = useNavigate();
 	return (

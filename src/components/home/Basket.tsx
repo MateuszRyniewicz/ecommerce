@@ -1,11 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { useNavigate } from 'react-router-dom';
 const Basket = () => {
 	const user = useSelector((state: RootState) => state.user.user);
 	const response = useSelector((state: RootState) => state.user.response);
 	console.log('basket', user?.cart);
-	console.log('response:', response);
+
+	const navigate = useNavigate();
 
 	const calculateTotalPrice = () => {
 		if (Array.isArray(user?.cart)) {
@@ -30,12 +32,21 @@ const Basket = () => {
 			<p>
 				{calculateTotalPrice() ? (
 					<span>
-						{response?.success && Array.isArray(user?.cart)
-							? calculateTotalPrice()
-							: ''}
+						{response?.success && Array.isArray(user?.cart) ? (
+							calculateTotalPrice() ? (
+								<button
+									onClick={() => navigate(`/summary/${calculateTotalPrice()}`)}>
+									przejdz do podsumowania
+								</button>
+							) : (
+								''
+							)
+						) : (
+							''
+						)}
 					</span>
 				) : (
-					'0'
+					''
 				)}
 			</p>
 		</div>

@@ -1,9 +1,9 @@
-import { Product } from "./product";
+import { Product } from './product';
 
 export interface User {
-	id:string;
+	id: string;
 	email: string;
 	password: string;
 	name?: string;
-	cart: Product| Product[]
+	cart: Product | Product[];
 }

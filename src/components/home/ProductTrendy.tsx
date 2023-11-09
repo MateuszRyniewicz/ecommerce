@@ -28,7 +28,7 @@ const ProductTrendy = () => {
 	const dispatch = useDispatch();
 
 	const { products } = useSelector((state: RootState) => state.products);
-	const { user } = useSelector((state: RootState) => state.user);
+	// const { user } = useSelector((state: RootState) => state.user);
 
 	useEffect(() => {
 		const getApi = async () => {
@@ -41,6 +41,7 @@ const ProductTrendy = () => {
 				console.log('test');
 			}
 		};
+
 		getApi();
 	}, []);
 

@@ -4,7 +4,7 @@ import ProductTrendy from '../components/home/ProductTrendy';
 const HomePage = () => {
 	return (
 		<section>
-			<ProductTrendy />
+			<p>home</p>
 		</section>
 	);
 };
