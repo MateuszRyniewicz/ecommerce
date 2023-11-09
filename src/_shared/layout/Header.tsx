@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
 import {
@@ -59,7 +59,7 @@ const Header: FC = () => {
 						<AiOutlineUserDelete />
 					</Link>
 					<AiOutlineHeart />
-					<StyledBoxIconCart>
+					<StyledBoxIconCart onClick={() => console.log('go to basket')}>
 						<BsFillBagFill />
 						<StyledBoxCounter>
 							<StyledCounter>
@@ -67,7 +67,9 @@ const Header: FC = () => {
 									0
 								) : Array.isArray(user.cart) ? (
 									<p> {user.cart.length}</p>
-								) : null}
+								) : (
+									0
+								)}
 							</StyledCounter>
 						</StyledBoxCounter>
 					</StyledBoxIconCart>

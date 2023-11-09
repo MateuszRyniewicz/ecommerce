@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { getUser } from '../store/AuthSlice';
+// import { getUser } from '../store/AuthSlice';
 
 const Dashboard: FC = () => {
 	const user = useSelector((state: RootState) => state.user.user);
@@ -9,7 +9,20 @@ const Dashboard: FC = () => {
 	console.log(user);
 
 	useEffect(() => {}, [user]);
-	return <div>{user?.name}</div>;
+	return (
+		<div>
+			<p>{user?.email}</p>
+			{/* <p>
+				{Array.isArray(user?.cart) &&
+					user?.cart.map((item) => (
+						<div key={item.id}>
+							<p>{item.title}</p>
+						
+						</div>
+					))}
+			</p> */}
+		</div>
+	);
 };
 
 export default Dashboard;

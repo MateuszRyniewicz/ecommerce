@@ -29,8 +29,8 @@ const ProductCard: FC<ProdcutCard> = ({ product }) => {
 				<StyledBtnCard
 					onClick={() => {
 						dispatch(addProductToCart(product));
-						
-						naviagte('/dashboard');
+
+						naviagte('/basket');
 					}}>
 					Add to Cart
 				</StyledBtnCard>
