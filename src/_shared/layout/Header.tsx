@@ -23,6 +23,8 @@ import {
 	StyledNav,
 	StyledBoxLogoAndMenu,
 	StyledMenuItem,
+	StyledBoxSearch,
+	StyledInputSearch,
 } from './Header.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { Product } from '../../types/product';
@@ -47,9 +49,6 @@ const Header: FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	console.log('products:', products);
-	console.log('originalList:', originaList);
-
 	useEffect(() => {
 		if (originaList.length === 0) {
 			setOriginalList(products);
@@ -62,7 +61,6 @@ const Header: FC = () => {
 	}, [input]);
 	return (
 		<StyledHeader>
-			{isOpen && <input onChange={(e) => setInput(e.target.value)} />}
 			<StyledNav>
 				<StyledBoxLogoAndMenu>
 					<StyledBoxImage>
@@ -79,7 +77,14 @@ const Header: FC = () => {
 				</StyledBoxLogoAndMenu>
 
 				<StyledBoxUserMenu>
-					<AiOutlineSearch onClick={() => setIsOpen(true)} />
+					<StyledBoxSearch>
+						<AiOutlineSearch onClick={() => setIsOpen(!isOpen)} />
+						{isOpen && (
+							<StyledInputSearch
+								onChange={(e: any) => setInput(e.target.value)}
+							/>
+						)}
+					</StyledBoxSearch>
 					<Link to={'/login'}>
 						<AiOutlineUserDelete />
 					</Link>

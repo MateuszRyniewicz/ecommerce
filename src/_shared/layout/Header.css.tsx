@@ -10,6 +10,7 @@ export const StyledHeader = styled.header`
 	display: flex;
 	justify-content: space-around;
 	height: 70px;
+	border: 1px solid red;
 `;
 
 export const StyledNav = styled.nav`
@@ -93,4 +94,16 @@ export const StyledBoxCounter = styled.div`
 
 export const StyledCounter = styled.p`
 	font-size: 12px;
+`;
+
+export const StyledBoxSearch = styled.div`
+	display: flex;
+	align-content: center;
+	gap: 5px;
+`;
+export const StyledInputSearch = styled.input`
+	border: 1px solid #333;
+	border-radius: 10px;
+	outline: none;
+	height: 18px;
 `;
