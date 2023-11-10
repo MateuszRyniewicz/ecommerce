@@ -6,17 +6,17 @@ const FavoriteItems = () => {
 	const user = useSelector((state: RootState) => state.user.user);
 	return (
 		<div>
-			<div>
+			<p>
 				{user ? (
-					<p>
-						{Array.isArray(user.favorite)
-							? user.favorite.map((item) => <p key={item.id}>{item.title}</p>)
-							: 'zaloguj sie aby dodac do ulubionych'}
-					</p>
+					Array.isArray(user?.favorite) ? (
+						user?.favorite.map((item) => <p key={item.id}>{item.title}</p>)
+					) : (
+						<span>lista ulubionych jest pusta</span>
+					)
 				) : (
-					<p>dodaj do ulubionych</p>
+					'zaloguj sie by dodać do ulubionych'
 				)}
-			</div>
+			</p>
 		</div>
 	);
 };

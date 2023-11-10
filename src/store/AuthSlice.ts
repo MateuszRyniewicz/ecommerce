@@ -127,7 +127,7 @@ export const userSlice = createSlice({
 
 			state.usersList = state.usersList.map((user) =>
 				user.id === state.user?.id
-					? { ...user, cart: loggedUserFavorite! }
+					? { ...user, favorite: loggedUserFavorite! }
 					: user
 			);
 		},

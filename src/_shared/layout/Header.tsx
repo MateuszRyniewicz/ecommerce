@@ -41,6 +41,7 @@ const menuItems = [
 const Header: FC = () => {
 	const [input, setInput] = useState<string>('');
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isColor, setIsColor] = useState<boolean>(false);
 
 	const { products } = useSelector((state: RootState) => state.products);
 	const [originaList, setOriginalList] = useState<Product[]>(products);
@@ -58,7 +59,12 @@ const Header: FC = () => {
 		} else {
 			dispatch(setProducts(originaList));
 		}
-	}, [input]);
+		if (Array.isArray(user?.favorite) && user?.favorite.length !== 0) {
+			setIsColor(true);
+		}
+	}, [input, user]);
+
+	console.log('user favorite', user?.favorite);
 	return (
 		<StyledHeader>
 			<StyledNav>
@@ -88,7 +94,13 @@ const Header: FC = () => {
 					<Link to={'/login'}>
 						<AiOutlineUserDelete />
 					</Link>
-					<AiOutlineHeart onClick={() => navigate('favoriteItems')} />
+					<div
+						style={{
+							backgroundColor: isColor ? 'blue' : 'red',
+							padding: '20px',
+						}}>
+						<AiOutlineHeart onClick={() => navigate('favoriteItems')} />
+					</div>
 
 					<StyledBoxIconCart onClick={() => navigate('/basket')}>
 						<BsFillBagFill />

@@ -22,7 +22,7 @@ interface ProdcutCard {
 
 const ProductCard: FC<ProdcutCard> = ({ product }) => {
 	const user = useSelector((state: RootState) => state.user.user);
-	console.log(user);
+	//	console.log(user);
 	const dispatch = useDispatch();
 	const naviagate = useNavigate();
 	return (
@@ -41,7 +41,7 @@ const ProductCard: FC<ProdcutCard> = ({ product }) => {
 			<div>
 				<StyledBoxCategoryLike>
 					<StyledBoxTextColor>{product.category}</StyledBoxTextColor>
-					<div onClick={() => dispatch(addProductToCart(product))}>
+					<div>
 						<AiOutlineHeart
 							onClick={() => dispatch(addProductToFavorite(product))}
 						/>

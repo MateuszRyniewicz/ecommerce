@@ -19,7 +19,7 @@ const Basket = () => {
 	return (
 		<div>
 			<p>
-				{response?.success ? (
+				{user ? (
 					Array.isArray(user?.cart) ? (
 						user?.cart.map((item) => <p key={item.id}>{item.price}</p>)
 					) : (
@@ -32,7 +32,7 @@ const Basket = () => {
 			<p>
 				{calculateTotalPrice() ? (
 					<span>
-						{response?.success && Array.isArray(user?.cart) ? (
+						{user && Array.isArray(user?.cart) ? (
 							calculateTotalPrice() ? (
 								<button
 									onClick={() => navigate(`/summary/${calculateTotalPrice()}`)}>
