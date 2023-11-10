@@ -6,4 +6,5 @@ export interface User {
 	password: string;
 	name?: string;
 	cart: Product | Product[];
+	favorite: Product | Product[];
 }

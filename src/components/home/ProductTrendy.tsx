@@ -15,6 +15,7 @@ import {
 } from './ProductTrendy.css';
 import { setProducts } from '../../store/ProductsSlice';
 import { RootState } from '../../store';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const categoriesTrendy = [
 	{ name: 'All' },
@@ -24,7 +25,8 @@ const categoriesTrendy = [
 ];
 
 const ProductTrendy = () => {
-	const [limit, setLimit] = useState<string>('');
+	const [limit, setLimit] = useState<string | number>('');
+
 	const dispatch = useDispatch();
 
 	const { products } = useSelector((state: RootState) => state.products);
@@ -89,7 +91,7 @@ const ProductTrendy = () => {
 						})
 				)}
 			</StyledProdcutCardContanier>
-			<div>
+			<div style={{ display: 'flex', gap: '20px' }}>
 				<p>amount of</p>
 				<select
 					className='select-pagination'

@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import BasketPage from './pages/BasketPage';
 import ShopPage from './pages/ShopPage';
 import Summary from './components/home/Summary';
+import FavoriteItems from './components/home/FavoriteItems';
 
 const router = createBrowserRouter([
 	{
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
 			{
 				path: '/summary/:totalPrice',
 				element: <Summary />,
+			},
+			{
+				path: '/favoriteItems',
+				element: <FavoriteItems />,
 			},
 		],
 	},

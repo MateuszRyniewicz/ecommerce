@@ -18,12 +18,14 @@ const initialState: UserState = {
 			email: 'ryniuss@o2.pl',
 			password: '12345678',
 			cart: [],
+			favorite: [],
 		},
 		{
 			id: '5505fb64-2fc1-11ee-be56-0242ac120002',
 			email: '111@o2.pl',
 			password: '12345678',
 			cart: [],
+			favorite: [],
 		},
 	],
 
@@ -69,6 +71,7 @@ export const userSlice = createSlice({
 					email: action.payload.email!,
 					password: action.payload.password!,
 					cart: [],
+					favorite: [],
 					id: uuidv4(),
 				};
 				state.response = { success: true, message: 'added new user' };
@@ -107,10 +110,36 @@ export const userSlice = createSlice({
 				user.id === state.user?.id ? { ...user, cart: loggedUserCart! } : user
 			);
 		},
+
+		addProductToFavorite: (state, action: PayloadAction<Product>) => {
+			let loggedUserFavorite = Array.isArray(state.user?.favorite)
+				? state.user?.favorite
+				: [];
+			loggedUserFavorite?.find(
+				(product: any) => product.id === Number(action.payload.id)
+			)
+				? (loggedUserFavorite = loggedUserFavorite.map((product) =>
+						product.id === Number(action.payload.id)
+							? { ...product, amount: product.amount + action.payload.amount }
+							: product
+				  ))
+				: loggedUserFavorite?.push(action.payload);
+
+			state.usersList = state.usersList.map((user) =>
+				user.id === state.user?.id
+					? { ...user, cart: loggedUserFavorite! }
+					: user
+			);
+		},
 	},
 });
 
-export const { loginUser, registerUser, getUser, addProductToCart } =
-	userSlice.actions;
+export const {
+	loginUser,
+	registerUser,
+	getUser,
+	addProductToCart,
+	addProductToFavorite,
+} = userSlice.actions;
 
 export default userSlice.reducer;

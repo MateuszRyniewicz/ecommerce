@@ -11,37 +11,41 @@ import {
 	StyledBoxTextColor,
 	StyledBoxText,
 } from './ProductCard.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addProductToCart } from '../../store/AuthSlice';
+import { addProductToCart, addProductToFavorite } from '../../store/AuthSlice';
+import { RootState } from '../../store';
 
 interface ProdcutCard {
 	product: Product;
 }
 
 const ProductCard: FC<ProdcutCard> = ({ product }) => {
-	//console.log('wartosci produktu', product);
+	const user = useSelector((state: RootState) => state.user.user);
+	console.log(user);
 	const dispatch = useDispatch();
-	const naviagte = useNavigate();
+	const naviagate = useNavigate();
 	return (
 		<StyledProdcutCard>
 			<StyledBoxImg>
 				<StyledImgCard src={product.image} alt={product.title} />
-				<StyledBtnCard
+				{/* <StyledBtnCard
 					onClick={() => {
 						dispatch(addProductToCart(product));
 
-						naviagte('/basket');
+						naviagate('/basket');
 					}}>
 					Add to Cart
-				</StyledBtnCard>
+				</StyledBtnCard> */}
 			</StyledBoxImg>
 			<div>
 				<StyledBoxCategoryLike>
 					<StyledBoxTextColor>{product.category}</StyledBoxTextColor>
-					<p>
-						<AiOutlineHeart />
-					</p>
+					<div onClick={() => dispatch(addProductToCart(product))}>
+						<AiOutlineHeart
+							onClick={() => dispatch(addProductToFavorite(product))}
+						/>
+					</div>
 				</StyledBoxCategoryLike>
 				<StyledBoxText>{product.title}</StyledBoxText>
 				<StyledBoxText>{product.price}</StyledBoxText>

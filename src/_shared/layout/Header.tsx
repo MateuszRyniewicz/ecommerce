@@ -88,7 +88,7 @@ const Header: FC = () => {
 					<Link to={'/login'}>
 						<AiOutlineUserDelete />
 					</Link>
-					<AiOutlineHeart />
+					<AiOutlineHeart onClick={() => navigate('favoriteItems')} />
 
 					<StyledBoxIconCart onClick={() => navigate('/basket')}>
 						<BsFillBagFill />
