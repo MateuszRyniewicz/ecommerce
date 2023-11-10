@@ -7,8 +7,8 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import RegisterPage from './pages/RegisterPage';
 import BasketPage from './pages/BasketPage';
+import ShopPage from './pages/ShopPage';
 import Summary from './components/home/Summary';
-import Shop from './components/home/Shop';
 
 const router = createBrowserRouter([
 	{
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
 				path: '/register',
 				element: <RegisterPage />,
 			},
-			{ path: '/shop', element: <Shop /> },
+			{ path: '/shop', element: <ShopPage /> },
 			{
 				path: '/basket',
 				element: <BasketPage />,

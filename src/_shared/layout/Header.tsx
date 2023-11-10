@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RootState } from '../../store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterProducts, setProducts } from '../../store/ProductsSlice';
+
 import {
 	AiOutlineSearch,
 	AiOutlineUserDelete,
@@ -23,6 +25,7 @@ import {
 	StyledMenuItem,
 } from './Header.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { Product } from '../../types/product';
 
 const menuItems = [
 	{ name: 'Home', path: '/' },
@@ -34,12 +37,32 @@ const menuItems = [
 ];
 
 const Header: FC = () => {
-	const user = useSelector((state: RootState) => state.user.user);
-	// console.log('header', user);
+	const [input, setInput] = useState<string>('');
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 
+	const { products } = useSelector((state: RootState) => state.products);
+	const [originaList, setOriginalList] = useState<Product[]>(products);
+	const user = useSelector((state: RootState) => state.user.user);
+
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	console.log('products:', products);
+	console.log('originalList:', originaList);
+
+	useEffect(() => {
+		if (originaList.length === 0) {
+			setOriginalList(products);
+		}
+		if (input) {
+			dispatch(filterProducts(input));
+		} else {
+			dispatch(setProducts(originaList));
+		}
+	}, [input]);
 	return (
 		<StyledHeader>
+			{isOpen && <input onChange={(e) => setInput(e.target.value)} />}
 			<StyledNav>
 				<StyledBoxLogoAndMenu>
 					<StyledBoxImage>
@@ -56,7 +79,7 @@ const Header: FC = () => {
 				</StyledBoxLogoAndMenu>
 
 				<StyledBoxUserMenu>
-					<AiOutlineSearch />
+					<AiOutlineSearch onClick={() => setIsOpen(true)} />
 					<Link to={'/login'}>
 						<AiOutlineUserDelete />
 					</Link>

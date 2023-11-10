@@ -17,9 +17,20 @@ export const productsSlice = createSlice({
 				amount: 50,
 			}));
 		},
+
+		filterProducts: (state, action: PayloadAction<string>) => {
+			state.products = state.products.filter(
+				(product) =>
+					product.title
+						.toLocaleLowerCase()
+						.includes(action.payload.toLowerCase()) ||
+					product.category.includes(action.payload.toLowerCase()) ||
+					product.description.includes(action.payload.toLowerCase())
+			);
+		},
 	},
 });
 
-export const { setProducts } = productsSlice.actions;
+export const { setProducts, filterProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;
