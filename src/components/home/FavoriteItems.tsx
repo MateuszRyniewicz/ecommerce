@@ -1,22 +1,23 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import ProductCard from './ProductCard';
 
 const FavoriteItems = () => {
 	const user = useSelector((state: RootState) => state.user.user);
 	return (
 		<div>
-			<p>
-				{user ? (
-					Array.isArray(user?.favorite) ? (
-						user?.favorite.map((item) => <p key={item.id}>{item.title}</p>)
-					) : (
-						<span>lista ulubionych jest pusta</span>
-					)
+			{user ? (
+				Array.isArray(user?.favorite) ? (
+					user?.favorite.map((product, index) => (
+						<ProductCard key={index} product={product} />
+					))
 				) : (
-					'zaloguj sie by dodać do ulubionych'
-				)}
-			</p>
+					<span>lista ulubionych jest pusta</span>
+				)
+			) : (
+				'zaloguj sie by dodać do ulubionych'
+			)}
 		</div>
 	);
 };

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Product } from '../../types/product';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import {
 	StyledProdcutCard,
 	StyledBoxCategoryLike,
@@ -21,10 +21,17 @@ interface ProdcutCard {
 }
 
 const ProductCard: FC<ProdcutCard> = ({ product }) => {
+	const [isFavorite, setIsFavorite] = useState<Boolean>(false);
 	const user = useSelector((state: RootState) => state.user.user);
 	//	console.log(user);
 	const dispatch = useDispatch();
 	const naviagate = useNavigate();
+
+	// useEffect(() => {
+	// 	if (Array.isArray(user?.favorite) > 0) {
+	// 		setIsFavorite(true);
+	// 	}
+	// }, []);
 	return (
 		<StyledProdcutCard>
 			<StyledBoxImg>
@@ -42,9 +49,19 @@ const ProductCard: FC<ProdcutCard> = ({ product }) => {
 				<StyledBoxCategoryLike>
 					<StyledBoxTextColor>{product.category}</StyledBoxTextColor>
 					<div>
-						<AiOutlineHeart
-							onClick={() => dispatch(addProductToFavorite(product))}
-						/>
+						{isFavorite ? (
+							<AiFillHeart
+								style={{ color: 'blue' }}
+								onClick={() => dispatch(addProductToFavorite(product))}
+							/>
+						) : (
+							<AiOutlineHeart
+								onClick={() => {
+									dispatch(addProductToFavorite(product));
+									setIsFavorite(true);
+								}}
+							/>
+						)}
 					</div>
 				</StyledBoxCategoryLike>
 				<StyledBoxText>{product.title}</StyledBoxText>

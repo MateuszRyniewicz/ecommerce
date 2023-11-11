@@ -7,6 +7,7 @@ import {
 	AiOutlineSearch,
 	AiOutlineUserDelete,
 	AiOutlineHeart,
+	AiFillHeart,
 } from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa';
 import { BsFillBagFill } from 'react-icons/bs';
@@ -28,6 +29,7 @@ import {
 } from './Header.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { Product } from '../../types/product';
+import Popup from '../../components/Popup';
 
 const menuItems = [
 	{ name: 'Home', path: '/' },
@@ -41,7 +43,8 @@ const menuItems = [
 const Header: FC = () => {
 	const [input, setInput] = useState<string>('');
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [isColor, setIsColor] = useState<boolean>(false);
+	const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
+	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
 	const { products } = useSelector((state: RootState) => state.products);
 	const [originaList, setOriginalList] = useState<Product[]>(products);
@@ -49,6 +52,8 @@ const Header: FC = () => {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const text = 'test';
 
 	useEffect(() => {
 		if (originaList.length === 0) {
@@ -59,12 +64,11 @@ const Header: FC = () => {
 		} else {
 			dispatch(setProducts(originaList));
 		}
-		if (Array.isArray(user?.favorite) && user?.favorite.length !== 0) {
-			setIsColor(true);
+		if (user && Array.isArray(user?.favorite) && user?.favorite.length > 0) {
+			setIsFavorite(true);
 		}
-	}, [input, user]);
+	}, [input, user?.favorite]);
 
-	console.log('user favorite', user?.favorite);
 	return (
 		<StyledHeader>
 			<StyledNav>
@@ -94,12 +98,12 @@ const Header: FC = () => {
 					<Link to={'/login'}>
 						<AiOutlineUserDelete />
 					</Link>
-					<div
-						style={{
-							backgroundColor: isColor ? 'blue' : 'red',
-							padding: '20px',
-						}}>
-						<AiOutlineHeart onClick={() => navigate('favoriteItems')} />
+					<div>
+						{isFavorite ? (
+							<AiFillHeart onClick={() => navigate('favoriteItems')} />
+						) : (
+							<AiOutlineHeart onClick={() => navigate('favoriteItems')} />
+						)}
 					</div>
 
 					<StyledBoxIconCart onClick={() => navigate('/basket')}>

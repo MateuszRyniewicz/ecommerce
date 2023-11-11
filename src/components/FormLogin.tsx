@@ -28,8 +28,9 @@ const validationSchema = () =>
 
 const FormLogin: FC = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	const text = 'text';
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const response = useSelector((state: RootState) => state.user.response);
 	console.log(response);
@@ -50,7 +51,7 @@ const FormLogin: FC = () => {
 
 	return (
 		<StyledSection>
-			{isOpen && <Popup />}
+			{isOpen && <Popup text={text} />}
 			<StyledHeaderText>LOGIN ACCOUNT</StyledHeaderText>
 			<Formik<Partial<User>>
 				initialValues={initialValues}
